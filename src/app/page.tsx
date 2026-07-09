@@ -1,5 +1,6 @@
 import Intro from "@/components/intro";
 import Description from "@/components/description";
+import Experiences from "@/components/experiences";
 import Section from "@/components/section";
 import Kpi from "@/components/kpi";
 import InsightsTechTransition from "@/components/insights-tech-transition";
@@ -11,6 +12,7 @@ export default function Home() {
     <main>
       <Intro />
       <Description />
+      <Experiences />
       <Section />
       <Kpi />
       <InsightsTechTransition />
