@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Instrument_Serif } from "next/font/google";
+import SideRays from "./SideRays";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -94,13 +95,24 @@ const experiences = [
   },
 ];
 
-function AuroraBackground() {
+function ExperienceBackground() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <div className="experiences-aurora-blob experiences-aurora-blob-1" />
-      <div className="experiences-aurora-blob experiences-aurora-blob-2" />
-      <div className="experiences-aurora-blob experiences-aurora-blob-3" />
-      <div className="absolute inset-0 bg-[#070707]/55 backdrop-blur-[1px]" />
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+      <SideRays
+        origin="top-right"
+        rayColor1="#004E63"
+        rayColor2="#00C8FF"
+        speed={2}
+        intensity={1.6}
+        spread={2.2}
+        saturation={1.4}
+        blend={0.7}
+        falloff={2.2}
+        opacity={0.85}
+        fadeInDuration={1400}
+        className="absolute inset-0 z-0"
+      />
+      <div className="absolute inset-0 z-0 bg-[#070707]/50" />
     </div>
   );
 }
@@ -161,11 +173,11 @@ export default function Experiences() {
     <section
       id="experience"
       data-header-theme="dark"
-      className="relative bg-[#070707] px-[6vw] py-24 md:py-32"
+      className="relative isolate bg-[#070707] px-[6vw] py-24 md:py-32"
     >
-      <AuroraBackground />
+      <ExperienceBackground />
 
-      <div className="relative mx-auto grid max-w-[1400px] items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+      <div className="relative z-10 mx-auto grid max-w-[1400px] items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         <div className="sticky top-28 z-10 self-start">
           <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#86858B]">
             Career
