@@ -99,6 +99,20 @@ function ExperienceBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
       <SideRays
+        origin="top-left"
+        rayColor1="#004E63"
+        rayColor2="#00C8FF"
+        speed={1.8}
+        intensity={1.2}
+        spread={2.8}
+        saturation={1.3}
+        blend={0.65}
+        falloff={2.4}
+        opacity={0.7}
+        fadeInDuration={1400}
+        className="absolute inset-0 z-0 md:hidden"
+      />
+      <SideRays
         origin="top-right"
         rayColor1="#004E63"
         rayColor2="#00C8FF"
@@ -110,9 +124,9 @@ function ExperienceBackground() {
         falloff={2.2}
         opacity={0.85}
         fadeInDuration={1400}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 hidden md:block"
       />
-      <div className="absolute inset-0 z-0 bg-[#070707]/50" />
+      <div className="absolute inset-0 z-0 bg-[#070707]/65 md:bg-[#070707]/50" />
     </div>
   );
 }
@@ -133,30 +147,34 @@ function ExperienceItem({
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.6, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      className="border-t border-white/15 py-10 md:py-14"
+      className="border-t border-white/15 py-8 md:py-14"
     >
-      <div className="flex gap-6 md:gap-10">
-        <span className="shrink-0 pt-1 text-sm font-light tabular-nums text-white/45 md:text-base">
+      <div className="flex gap-4 md:gap-10">
+        <span className="shrink-0 pt-0.5 text-xs font-light tabular-nums text-white/45 md:pt-1 md:text-base">
           {String(index + 1).padStart(2, "0")}
         </span>
 
-        <div className="flex flex-col gap-4">
+        <div className="min-w-0 flex flex-col gap-3 md:gap-4">
           <div className="space-y-2">
-            <p className="text-xs font-light uppercase tracking-[0.14em] text-[#86858B] md:text-sm">
+            <p className="text-[11px] font-light uppercase leading-relaxed tracking-[0.1em] text-[#86858B] md:text-sm md:tracking-[0.14em]">
               {experience.company} — {experience.location}
             </p>
-            <h3 className="text-2xl font-medium leading-tight text-white md:text-3xl">
-              <span className={`${instrumentSerif.className} text-[#00C8FF]`}>
+            <div className="space-y-1.5 md:space-y-0">
+              <p
+                className={`${instrumentSerif.className} text-xl leading-snug text-[#00C8FF] md:text-3xl`}
+              >
                 {experience.period}
-              </span>
-              <span className="mx-2 text-white/35">&gt;</span>
-              {experience.role}
-              {experience.current && (
-                <span className="ml-3 inline-block rounded-full border border-[#00C8FF]/40 bg-[#00C8FF]/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#00C8FF] align-middle">
-                  Current
-                </span>
-              )}
-            </h3>
+              </p>
+              <h3 className="flex flex-wrap items-center gap-x-2 gap-y-1 text-lg font-medium leading-snug text-white md:text-3xl md:leading-tight">
+                <span className="hidden text-white/35 md:inline">&gt;</span>
+                <span>{experience.role}</span>
+                {experience.current && (
+                  <span className="inline-block rounded-full border border-[#00C8FF]/40 bg-[#00C8FF]/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#00C8FF]">
+                    Current
+                  </span>
+                )}
+              </h3>
+            </div>
           </div>
 
           <p className="max-w-2xl text-sm leading-relaxed text-[#b6b6b6] md:text-base md:leading-[1.7]">
@@ -173,21 +191,21 @@ export default function Experiences() {
     <section
       id="experience"
       data-header-theme="dark"
-      className="relative isolate bg-[#070707] px-[6vw] py-24 md:py-32"
+      className="relative isolate bg-[#070707] px-5 py-16 sm:px-[6vw] md:py-32"
     >
       <ExperienceBackground />
 
-      <div className="relative z-10 mx-auto grid max-w-[1400px] items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
-        <div className="sticky top-28 z-10 self-start">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#86858B]">
+      <div className="relative z-10 mx-auto grid max-w-[1400px] items-start gap-8 md:gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+        <div className="lg:sticky lg:top-28 lg:z-10 lg:h-fit lg:self-start">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-[#86858B] md:mb-4">
             Career
           </p>
-          <h2 className="font-poppins text-[80px] font-medium leading-[0.95] tracking-tight text-white">
+          <h2 className="font-poppins text-[clamp(2.75rem,14vw,5rem)] font-medium leading-[0.95] tracking-tight text-white lg:text-[80px]">
             Experiences
           </h2>
         </div>
 
-        <div>
+        <div className="min-w-0">
           {experiences.map((experience, index) => (
             <ExperienceItem
               key={`${experience.company}-${experience.period}`}
